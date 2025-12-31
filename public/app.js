@@ -1,4 +1,3 @@
-// Array of doctors
 const doctors = [
   { "image": "public/images/01.jpg", "name": "Dr. Ayesha Mainali", "speciality": "Cardiologist" },
   { "image": "public/images/02.jpg", "name": "Dr. Neha Mehta", "speciality": "Dermatologist" },
@@ -201,38 +200,44 @@ window.onload = function(){
 
 
 // SYMPTOMS
-let symptomsDiv = document.querySelector(".symptoms-div");
+document.addEventListener("DOMContentLoaded", function() {
+    const symptomsDiv = document.querySelector(".symptoms-div");
 
-const symptoms = [
-  { id: 1, name: "Fever", image: "/public/images/pulmonologist.jpg" },
-  { id: 2, name: "Cough", image: "/images/stomachpain.jpg" },
-  { id: 3, name: "Surgery", image: "/images/surgery.jpg" },
-  { id: 4, name: "Headache", image: "/images/headache.jpg" },
-  { id: 5, name: "Stomach Pain", image: "/images/stomachpain.jpg" },
-  { id: 6, name: "psychiatrist", image: "/images/psychiatrist.jpg" },
-  { id: 7, name: "Toothache", image: "/images/physiotherapist.jpg" },
-  { id: 7, name: "Physiotherapist", image: "/images/physiotherapist.jpg" },
-  { id: 8, name: "Pulmonologist", image: "/images/pulmonologist.jpg" }
-];
-symptoms.forEach(element => {
-    // create card
-    let card = document.createElement("div");
-    card.classList.add("symptoms-card");
+    if (!symptomsDiv) {
+        console.warn("No element with class 'symptoms-div' found!");
+        return; // stop execution if container doesn't exist
+    }
 
-    // image
-    let img = document.createElement("img");
-    img.src = element.image;
-    img.classList.add("symptoms-img");
+    const symptoms = [
+        { id: 1, name: "Fever", image: "public/images/pulmonologist.jpg" },
+        { id: 2, name: "Cough", image: "public/images/stomachpain.jpg" },
+        { id: 3, name: "Surgery", image: "public/images/surgery.jpg" },
+        { id: 4, name: "Headache", image: "public/images/headache.jpg" },
+        { id: 5, name: "Stomach Pain", image: "public/images/stomachpain.jpg" },
+        { id: 6, name: "Psychiatrist", image: "public/images/psychiatrist.jpg" },
+        { id: 7, name: "Toothache", image: "public/images/physiotherapist.jpg" },
+        { id: 8, name: "Physiotherapist", image: "public/images/physiotherapist.jpg" },
+        { id: 9, name: "Pulmonologist", image: "public/images/pulmonologist.jpg" }
+    ];
 
-    // name
-    let p = document.createElement("p");
-    p.textContent = element.name;
+    symptoms.forEach(element => {
+        const card = document.createElement("div");
+        card.classList.add("symptoms-card");
 
-    // append
-    card.appendChild(img);
-    card.appendChild(p);
-    symptomsDiv.appendChild(card);
+        const img = document.createElement("img");
+        img.src = element.image;
+        img.classList.add("symptoms-img");
+
+        const p = document.createElement("p");
+        p.textContent = element.name;
+
+        card.appendChild(img);
+        card.appendChild(p);
+
+        symptomsDiv.appendChild(card);
+    });
 });
+
 
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
@@ -254,3 +259,4 @@ document.addEventListener('click', (e) => {
         navLinks.classList.remove('active');
     }
 });
+

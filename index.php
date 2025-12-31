@@ -29,7 +29,7 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
         </div>
 
         <ul class="nav-links" id="navLinks">
-            <li><a href="#">Doctors</a></li>
+            <li><a href="./client/all-doctors.php">Doctors</a></li>
             <li><a href="#">Book Appointment</a></li>
             <li><a href="./client/premium-plans.php" class="premium-btn">Go Premium</a></li>
             <li><a href="./client/contact.php">Contact</a></li>
@@ -184,5 +184,6 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
     </form>
   </div>
 </div>
+<script src="public/app.js"></script>
 </body>
 </html>
