@@ -9,16 +9,148 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
 }
 
 ?>
+<style>
+    #chatBox {
+    position: fixed;
+    right: 20px;
+    bottom: 90px;
+    width: 320px;
+    height: 420px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    display: none;
+    flex-direction: column;
+    z-index: 9999;
+}
+#chatBox.active {
+    display: flex;
+    transform: translateY(0);
+}
+/* Header */
+.chat-header {
+    background: #0c6efc;
+    color: #fff;
+    padding: 12px;
+    border-radius: 14px 14px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+/* Body */
+.chat-body {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background: #f8fafc;
+}
+
+/* Messages */
+.chat-msg {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    max-width: 80%;
+    font-size: 14px;
+}
+
+.chat-msg.bot {
+    background: #e5e7eb;
+    align-self: flex-start;
+}
+
+.chat-msg.user {
+    background: #0c6efc;
+    color: white;
+    align-self: flex-end;
+}
+
+/* Footer */
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.chat-footer button {
+    margin-left: 6px;
+    padding: 8px 12px;
+    background: #0c6efc;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+    /* Chatbot floating button */
+#mess {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    background: #2b518aff;
+    color: #fff;
+    border-radius: 50% 50% 10% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#mess:hover {
+    background: #084cdf;
+    transform: scale(1.08);
+}
+
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocApp - Book Appointment</title>
-    <?php include ("./client/commonfile.php"); ?>
+    <?php include "./client/commonfile.php"; ?>
+    <link rel="stylesheet" href="public/style.css">
 </head>
 <body>
-   
+    <!-- CHATBOT AI -->
+   <div id="mess">
+    <i class="fa-solid fa-message"></i>
+   </div>
+   <div id="chatBox">
+    <div class="chat-header">
+        <span>DocApp Assistant</span>
+        <i class="fa-solid fa-xmark" id="closeChat"></i>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+        <div class="chat-msg bot">
+            👋 Hi! I'm DocApp Assistant. How can I help you today?
+        </div>
+    </div>
+
+    <div class="chat-footer">
+        <input type="text" id="chatInput" placeholder="Type your message...">
+        <button id="sendBtn">
+            <i class="fa-solid fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+
     <nav class="navbar">
         <div class="logo">
             <a href="./"><i class="fa-solid fa-notes-medical"></i> DocApp</a>
@@ -65,7 +197,7 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
 <section class="doctor-section">
    <div class="doctor-header">
         <h2 class="doctor-title">Top Doctors</h2>
-        <a href="all-doctors.php" class="view-all-btn">View All</a>
+        <a href="client/all-doctors.php" class="view-all-btn">View All</a>
     </div>
     <div class="doctor-slider-container">
         <button class="slide-btn left" id="slideLeft">
@@ -84,7 +216,7 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
 <section class="hospital-section">
     <div class="hospital-header">
         <h2>Top Hospitals</h2>
-        <a href="all-hospitals.php" class="view-all-btn">View All</a>
+        <a href="client/all-hospitals.php" class="view-all-btn">View All</a>
     </div>
     <div class="hospital-carousel">
         <button class="prev">&#10094;</button>
@@ -141,7 +273,7 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
     </div>
 </section>
 
-<?php include("./client/footer.php"); ?>
+<?php include "./client/footer.php"; ?>
 
 <!-- LOGIN / SIGNUP POPUP -->
 <div id="authModal" class="modal">
@@ -184,6 +316,56 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
     </form>
   </div>
 </div>
+<script>
+const messIcon = document.getElementById("mess");
+const chatBox = document.getElementById("chatBox");
+const closeChat = document.getElementById("closeChat");
+const sendBtn = document.getElementById("sendBtn");
+const chatInput = document.getElementById("chatInput");
+const chatBody = document.getElementById("chatBody");
+
+// Open chat
+messIcon.onclick = () => {
+    chatBox.classList.toggle("active"); 
+};
+
+
+// Close chat
+closeChat.onclick = () => {
+chatBox.classList.remove("active");
+};
+
+// Send message
+sendBtn.onclick = sendMessage;
+chatInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") sendMessage();
+});
+
+function sendMessage() {
+    const message = chatInput.value.trim();
+    if (message === "") return;
+
+    // User message
+    const userMsg = document.createElement("div");
+    userMsg.className = "chat-msg user";
+    userMsg.textContent = message;
+    chatBody.appendChild(userMsg);
+
+    chatInput.value = "";
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // Fake bot reply (placeholder)
+    setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.className = "chat-msg bot";
+        botMsg.textContent = "🤖 Thanks! Our assistant will help you shortly.";
+        chatBody.appendChild(botMsg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }, 800);
+}
+</script>
+
 <script src="public/app.js"></script>
+
 </body>
 </html>

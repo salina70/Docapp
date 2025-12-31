@@ -1,4 +1,8 @@
-const doctors = [
+
+document.addEventListener("DOMContentLoaded", function(){
+
+
+let doctors = [
   { "image": "public/images/01.jpg", "name": "Dr. Ayesha Mainali", "speciality": "Cardiologist" },
   { "image": "public/images/02.jpg", "name": "Dr. Neha Mehta", "speciality": "Dermatologist" },
   { "image": "public/images/03.jpg", "name": "Dr. Rohan Sharma", "speciality": "Pediatrician" },
@@ -30,7 +34,6 @@ const doctors = [
   { "image": "public/images/29.jpg", "name": "Dr. Rachna Bhatt", "speciality": "Infectious Disease Specialist" },
   { "image": "public/images/30.jpg", "name": "Dr. Varun Iyer", "speciality": "Surgeon" }
 ];
-
 
 // Generate doctor cards
 const doctorSlider = document.getElementById("doctorSlider");
@@ -129,8 +132,8 @@ const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 
 // Open modal when "Join" button is clicked
-document.getElementById("joinBtn").addEventListener("click", () => {
-    modal.style.display = "flex";
+document.getElementById("joinBtn").addEventListener("click", (e) => {
+        modal.style.display = "flex";
     loginForm.style.display = "flex";
     registerForm.style.display = "none";
 });
@@ -258,5 +261,14 @@ document.addEventListener('click', (e) => {
     if(!navLinks.contains(e.target) && !menuToggle.contains(e.target)){
         navLinks.classList.remove('active');
     }
+});
+
+// ESEWA integration
+let subscribe = document.querySelectorAll("subscribe-btn");
+subscribe.forEach((subs)=>{
+console.log("hi");
+});
+
+
 });
 

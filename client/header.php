@@ -1,7 +1,24 @@
+ <style>
+    .nav-links li a.menu-item.dashboard {
+    color: var(--btn-text);
+    background: var(--btn-bg);
+    padding: 6px 12px;
+    border-radius: var(--round);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.nav-links li a.menu-item.dashboard:hover {
+    background-color: var(--btn-hover-bg); 
+}
+
+ </style>
  <?php include("commonfile.php"); ?>
  <nav class="navbar">
         <div class="logo">
-            <a href="./"><i class="fa-solid fa-notes-medical"></i> DocApp</a>
+            <a href="../"><i class="fa-solid fa-notes-medical"></i> DocApp</a>
         </div>
 
         <div class="menu-toggle" id="menuToggle">
@@ -9,11 +26,13 @@
         </div>
 
         <ul class="nav-links" id="navLinks">
-            <li><a href="#">Doctors</a></li>
-            <li><a href="#">Book Appointment</a></li>
-            <li><a href="./client/premium-plans.php" class="premium-btn">Go Premium</a></li>
-            <li><a href="./client/contact.php">Contact</a></li>
-            <li><a href="" class="join-btn" id="joinBtn"><i class="fa-solid fa-user-plus"></i> Join</a></li>
+            <li><a href="../client/all-doctors.php">Doctors</a></li>
+            <li><a href="" id="book-app-nav">Book Appointment</a></li>
+            <li><a href="../client/premium-plans.php" class="premium-btn">Go Premium</a></li>
+            <li><a href="../client/contact.php">Contact</a></li>
+            <li><a href=".." class="menu-item dashboard" onclick="goDashboard()"></i><i class="fa-solid fa-gauge"></i>
+         Dashboard</a></li>
+        
         </ul>
     </nav>
    <style>
@@ -184,7 +203,7 @@ color: var(--text-light);
 }
 
    </style>
-
+<script src="../public/app.js"></script>
 
 <script>
 const menuToggle = document.getElementById('menuToggle');

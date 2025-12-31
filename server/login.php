@@ -1,24 +1,67 @@
 <?php
 session_start();
-include("db.php");
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = $_POST['password'];
+/* after verifying email & password */
+$_SESSION['user_id'] = $user['id'];
+$_SESSION['user_name'] = $user['name'];
 
-    $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
-    if(mysqli_num_rows($query) > 0){
-        $user = mysqli_fetch_assoc($query);
-        if(password_verify($password, $user['password'])){
-            $_SESSION['user'] = $email; // set session
-            header("Location: dashboard.php");
-            exit();
-        } else {
-            echo "Incorrect password!";
-        }
-    } else {
-        echo "User not found! Please register first.";
-    }
-}
-
+header("Location: ../dashboard/doctor.php");
+exit;
 ?>
+<?php session_start(); ?>
+
+<?php
+if (!isset($_SESSION['user_id'])) {
+    // NOT LOGGED IN → Show first navbar
+?>
+<nav class="navbar">
+    <div class="logo">
+        <a href="./"><i class="fa-solid fa-notes-medical"></i> DocApp</a>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="./client/all-doctors.php">Doctors</a></li>
+        <li><a href="#">Book Appointment</a></li>
+        <li><a href="./client/premium-plans.php" class="premium-btn">Go Premium</a></li>
+        <li><a href="./client/contact.php">Contact</a></li>
+        <li><a href="#" class="join-btn" id="joinBtn">
+            <i class="fa-solid fa-user-plus"></i> Join
+        </a></li>
+    </ul>
+</nav>
+
+<?php
+} else {
+    // LOGGED IN → Show second navbar
+?>
+<nav class="navbar">
+    <div class="logo">
+        <a href="./"><i class="fa-solid fa-notes-medical"></i> DocApp</a>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="./client/all-doctors.php">Doctors</a></li>
+        <li><a href="#" id="book-app-nav">Book Appointment</a></li>
+        <li><a href="./client/premium-plans.php" class="premium-btn">Go Premium</a></li>
+        <li><a href="./client/contact.php">Contact</a></li>
+        <li>
+            <a href="./client/dashboard.php" class="menu-item dashboard">
+                <i class="fa-solid fa-gauge"></i> Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="./server/logout.php">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </li>
+    </ul>
+</nav>
+<?php } ?>
