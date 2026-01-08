@@ -1,3 +1,6 @@
+
+ 
+ 
  <style>
     .nav-links li a.menu-item.dashboard {
     color: var(--btn-text);
@@ -26,12 +29,9 @@
         </div>
 
         <ul class="nav-links" id="navLinks">
-            <li><a href="../client/all-doctors.php">Doctors</a></li>
-            <li><a href="" id="book-app-nav">Book Appointment</a></li>
-            <li><a href="../client/premium-plans.php" class="premium-btn">Go Premium</a></li>
-            <li><a href="../client/contact.php">Contact</a></li>
-            <li><a href=".." class="menu-item dashboard" onclick="goDashboard()"></i><i class="fa-solid fa-gauge"></i>
-         Dashboard</a></li>
+           
+            <li><a href="" class="menu-item dashboard"><i class="fa-solid fa-user"></i>
+         Patient Portal</a></li>
         
         </ul>
     </nav>

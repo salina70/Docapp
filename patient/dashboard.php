@@ -10,14 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .leftbox.active {
-            background-color: #4b5c7a;
+            background-color: var(--primary-dark);
             /* a lighter/darker shade for active */
         }
 
         body {
             font-family: "Poppins", sans-serif;
             margin: 0;
-            background: #f8fafc;
         }
 
         .container {
@@ -27,10 +26,11 @@
         }
 
         .leftdash {
-            width: 14rem;
+            height: 91.5vh;
+            width: 26rem;
             display: flex;
             flex-direction: column;
-            background: #1e293b;
+            background: var(--primary-color);
             color: #fff;
             overflow-y: auto;
             padding: 1rem 0;
@@ -43,7 +43,7 @@
         .leftbox {
             padding: .9rem 1rem;
             border-radius: .6rem;
-            background: #273449;
+            background: var(--primary-color);
             color: #fff;
             cursor: pointer;
             display: flex;
@@ -53,7 +53,7 @@
         }
 
         .leftbox:hover {
-            background: #374b70;
+            background: var(--btn-hover-bg);
             transform: translateX(4px);
         }
 
@@ -73,15 +73,18 @@
         }
 
         .card {
-            background: #fff;
+            background: var(--primary-color);
             padding: 1rem;
             border-radius: .6rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
             font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1rem;
+        }
+
+        .leftbox:hover {
+            background-color: var(--primary-dark);
         }
 
         table {
@@ -90,7 +93,6 @@
             background: #fff;
             border-radius: .6rem;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
         }
 
         th,
@@ -111,6 +113,108 @@
         .table-container {
             overflow-x: auto;
         }
+
+        .leftbox {
+            text-decoration: none;
+        }
+    .patient-dashboard {
+    padding: 1.5rem;
+    background: #f8fafc;
+    height: 100%;
+    overflow-y: auto; /* controlled scroll if needed */
+}
+
+.dashboard-title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #0b5ed7;
+    margin-bottom: 1.5rem;
+}
+
+.dashboard-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+
+.dash-card {
+    width: 280px; /* fixed width prevents vertical stacking */
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.dash-card:hover {
+    transform: translateY(-6px);
+}
+
+.card-header {
+    padding: 1.2rem;
+    color: #fff;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.card-header p {
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.card-body {
+    padding: 1.2rem;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.card-body h4 {
+    font-size: 1.6rem;
+    margin: 0;
+    color: #0b5ed7;
+}
+
+.card-body a {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-weight: 600;
+    color: #0b5ed7;
+    text-decoration: none;
+}
+
+/* Card colors (MATCH IMAGE) */
+.profile .card-header {
+    background: linear-gradient(135deg, #0d6efd, #0bbcd6);
+}
+
+.feedback .card-header {
+    background: linear-gradient(135deg, #ff4b4b, #ff7a7a);
+}
+
+.appointments .card-header {
+    background: linear-gradient(135deg, #28c76f, #20c997);
+}
+
+.book .card-header {
+    background: linear-gradient(135deg, #ff9f43, #ffa94d);
+}
+
+.invoice .card-header {
+    background: linear-gradient(135deg, #9b59b6, #b07cc6);
+}
+
+.reports .card-header {
+    background: linear-gradient(135deg, #17c3b2, #20dfc7);
+}
+
     </style>
 </head>
 
@@ -119,70 +223,133 @@
     <div class="container">
 
         <div class="leftdash">
-            <div class="leftbox"><i class="fa-solid fa-calendar-plus"></i> Book</div>
-            <div class="leftbox"><i class="fa-solid fa-calendar-check"></i> My Appointments</div>
-            <div class="leftbox"><i class="fa-solid fa-file-lines"></i> History</div>
-            <div class="leftbox"><i class="fa-solid fa-credit-card"></i> Payments</div>
-            <div class="leftbox"><i class="fa-solid fa-id-badge"></i> Profile</div>
-            <div class="leftbox"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
+
+            <a href="dashboard.php"
+                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-gauge"></i> Dashboard
+            </a>
+
+            <a href="book.php" class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'book.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-calendar-plus"></i> Book Appointment
+            </a>
+
+            <a href="profile.php"
+                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'profile.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-calendar-check"></i> View Profile
+            </a>
+
+            <a href="history.php"
+                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'history.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-file-lines"></i> Booking History
+            </a>
+
+            <a href="payments.php"
+                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'payments.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-credit-card"></i> Payments
+            </a>
+
+            <a href="complaints.php"
+                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'complaints.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-id-badge"></i> My Complaints
+            </a>
+
+            <a href="logout.php" class="leftbox">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+
         </div>
 
-        <div class="rightdash">
-            <div class="cards">
-                <div class="card">Upcoming Appointments: 0</div>
-                <div class="card">Past Appointments: 0</div>
-                <div class="card">Pending Payments: 0</div>
-            </div>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Doctor</th>
-                            <th>Status</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>10:00 AM</td>
-                            <td>Dr. Smith</td>
-                            <td style="color:green;">Confirmed</td>
-                            <td>Follow-up</td>
-                        </tr>
-                        <tr>
-                            <td>11:30 AM</td>
-                            <td>Dr. Adams</td>
-                            <td style="color:orange;">Pending</td>
-                            <td>First Visit</td>
-                        </tr>
-                        <tr>
-                            <td>02:00 PM</td>
-                            <td>Dr. Lee</td>
-                            <td style="color:red;">Cancelled</td>
-                            <td>Reschedule</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- right panel -->
+      
+<div class="patient-dashboard">
+
+    <h2 class="dashboard-title">Patient Dashboard</h2>
+
+    <div class="dashboard-cards">
+
+        <div class="dash-card profile">
+            <div class="card-header">
+                <h3>My Profile</h3>
+                <p>Manage your personal data & settings</p>
+            </div>
+            <div class="card-body">
+                <p>Update your contact details, health information, and preferences</p>
+                <a href="profile.php">Access Profile →</a>
+            </div>
+        </div>
+
+        <div class="dash-card book">
+            <div class="card-header">
+                <h3>Make Appointment</h3>
+                <p>Schedule a new appointment</p>
+            </div>
+            <div class="card-body">
+                <p>Book with specialists and manage your schedule</p>
+                <a href="book.php">Schedule Now →</a>
+            </div>
+        </div>
+
+        <div class="dash-card appointments">
+            <div class="card-header">
+                <h3>Previous Appointments</h3>
+                <p>Review your appointment history</p>
+            </div>
+            <div class="card-body">
+                <h4>5</h4>
+                <p>Total Appointments</p>
+                <a href="history.php">View History →</a>
+            </div>
+        </div>
+
+  <div class="dash-card feedback">
+            <div class="card-header">
+                <h3>Complain / Feedback</h3>
+                <p>Report issues or provide feedback</p>
+            </div>
+            <div class="card-body">
+                <p>We value your feedback to improve our services</p>
+                <a href="complaints.php">Submit Feedback →</a>
+            </div>
+        </div>
+
+    
+
+        <div class="dash-card invoice">
+            <div class="card-header">
+                <h3>My Invoices</h3>
+                <p>View and manage your billing</p>
+            </div>
+            <div class="card-body">
+                <h4>12</h4>
+                <p>Billing Statements</p>
+                                <a href="#">View Invoices →</a>
+
+            </div>
+        </div>
+
+        <div class="dash-card reports">
+            <div class="card-header">
+                <h3>Medical Reports</h3>
+                <p>Access your test results and reports</p>
+            </div>
+            <div class="card-body">
+                <h4>2</h4>
+                <p>Reports Available</p>
+                                <a href="#">View Reports →</a>
+
             </div>
         </div>
 
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const leftboxes = document.querySelectorAll('.leftbox');
+</div>
 
-            leftboxes.forEach(box => {
-                box.addEventListener('click', () => {
-                    // Remove active class from all boxes
-                    leftboxes.forEach(b => b.classList.remove('active'));
-                    // Add active class to the clicked box
-                    box.classList.add('active');
-                });
-            });
-        });
+
+    </div>
+    <script>
+
     </script>
+
 </body>
 
 </html>

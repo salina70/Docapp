@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | DocApp</title>
+    <title>Doctor Dashboard | DocApp</title>
     <?php include "../client/commonfile.php"; ?>
     <link rel="stylesheet" href="../public/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -27,7 +27,7 @@
 
         .leftdash {
             height: 91.5vh;
-            width: 26rem;
+            width: 16rem;
             display: flex;
             flex-direction: column;
             background: var(--primary-color);
@@ -207,7 +207,7 @@
         }
 
         .patient .card-header {
-background: linear-gradient(135deg, #6c757d, #495057);
+            background: linear-gradient(135deg, #6c757d, #495057);
         }
 
         .staff .card-header {
@@ -215,9 +215,10 @@ background: linear-gradient(135deg, #6c757d, #495057);
         }
 
         .reports .card-header {
-background: linear-gradient(135deg, #ff5f9e, #ff2d78);
+            background: linear-gradient(135deg, #ff5f9e, #ff2d78);
         }
-     .rightdash {
+
+        .rightdash {
             flex: 1;
             padding: 1rem;
             display: flex;
@@ -270,100 +271,125 @@ background: linear-gradient(135deg, #ff5f9e, #ff2d78);
 
         .table-container {
             overflow-x: auto;
-        }body {
-    background: #f4f6fb;
-    font-family: "Segoe UI", sans-serif;
-}
+        }
 
-.dashboard-wrapper {
-    padding: 30px;
-}
+        body {
+            background: #f4f6fb;
+            font-family: "Segoe UI", sans-serif;
+        }
 
-.dashboard-title {
-    text-align: center;
-    color: #0b5ed7;
-    margin-bottom: 30px;
-    font-weight: 600;
-}
+        .dashboard-wrapper {
+            padding: 30px;
+        }
 
-.dashboard-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    justify-content: center;
-}
+        .dashboard-title {
+            text-align: center;
+            color: #0b5ed7;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
 
-/* Card */
-.dash-card {
-    width: 270px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    overflow: hidden;
-    transition: 0.3s;
-}
+        .dashboard-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
 
-.dash-card:hover {
-    transform: translateY(-6px);
-}
+        /* Card */
+        .dash-card {
+            width: 270px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: 0.3s;
+        }
 
-/* Header */
-.card-header {
-    padding: 18px;
-    color: #fff;
-}
+        .dash-card:hover {
+            transform: translateY(-6px);
+        }
 
-.card-header h3 {
-    margin: 0;
-    font-size: 16px;
-}
+        /* Header */
+        .card-header {
+            padding: 18px;
+            color: #fff;
+        }
 
-/* Body */
-.card-body {
-    padding: 20px;
-    color: #444;
-}
+        .card-header h3 {
+            margin: 0;
+            font-size: 16px;
+        }
 
-.card-body i {
-    font-size: 26px;
-    color: #0b5ed7;
-    margin-bottom: 10px;
-    display: block;
-}
+        /* Body */
+        .card-body {
+            padding: 20px;
+            color: #444;
+        }
 
-.card-body h1 {
-    margin: 0;
-    font-size: 36px;
-    color: #0b5ed7;
-}
+        .card-body i {
+            font-size: 26px;
+            color: #0b5ed7;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-/* Footer */
-.card-footer {
-    padding: 15px 20px;
-    border-top: 1px solid #eee;
-}
+        .card-body h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #0b5ed7;
+        }
 
-.card-footer a {
-    color: #0b5ed7;
-    text-decoration: none;
-    font-weight: 600;
-}
-html, body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden; /* 🔥 stops full page scroll */
-}.rightdash,
-.dashboard-wrapper {
-    height: 100%;
-    overflow-y: auto; /* 🔥 only right panel scrolls */
-}
-        .blue .card-header { background: linear-gradient(135deg,#0d6efd,#0b5ed7); }
-.red .card-header { background: linear-gradient(135deg,#dc3545,#c82333); }
-.green .card-header { background: linear-gradient(135deg,#28a745,#218838); }
-.orange .card-header { background: linear-gradient(135deg,#fd7e14,#e8590c); }
-.purple .card-header { background: linear-gradient(135deg,#6f42c1,#59339d); }
-.teal .card-header { background: linear-gradient(135deg, #6c757d, #495057); }
+        /* Footer */
+        .card-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+        }
 
+        .card-footer a {
+            color: #0b5ed7;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            /* 🔥 stops full page scroll */
+        }
+
+        .rightdash,
+        .dashboard-wrapper {
+            height: 100%;
+            overflow-y: auto;
+            /* 🔥 only right panel scrolls */
+        }
+
+        .blue .card-header {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+        }
+
+        .red .card-header {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+        }
+
+        .green .card-header {
+            background: linear-gradient(135deg, #28a745, #218838);
+        }
+
+        .orange .card-header {
+            background: linear-gradient(135deg, #fd7e14, #e8590c);
+        }
+
+        .purple .card-header {
+            background: linear-gradient(135deg, #6f42c1, #59339d);
+        }
+
+        .teal .card-header {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
     </style>
 </head>
 
@@ -378,18 +404,14 @@ html, body {
                 <i class="fa-solid fa-gauge"></i> Dashboard
             </a>
 
-            <a href="manage-doctors.php" class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'manage-doctors.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-user-doctor"></i> Manage Doctors
-            </a>
-
-            <a href="manage-patients.php"
-                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'manage-patients.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-calendar-check"></i> Manage Patients
-            </a>
-
             <a href="appointments.php"
-                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'appointments.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-file-lines"></i> Appointemnts
+                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'manage-doctors.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-user-doctor"></i> Appointments
+            </a>
+
+            <a href="profile.php"
+                class="leftbox <?= basename($_SERVER['PHP_SELF']) == 'manage-patients.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-calendar-check"></i> View Profile
             </a>
 
             <a href="feedback.php"
@@ -409,99 +431,6 @@ html, body {
 
 
         <!-- right panel -->
-
-                  <div class="dashboard-wrapper">
-    <h2 class="dashboard-title">Admin Dashboard</h2>
-
-    <div class="dashboard-cards">
-
-        <!-- Admin Profile -->
-        <div class="dash-card blue">
-            <div class="card-header">
-                <h3>Admin Profile</h3>
-            </div>
-            <div class="card-body">
-                <i class="fa-solid fa-user-shield"></i>
-                <p>Manage admin account, credentials and system settings</p>
-            </div>
-            <div class="card-footer">
-                <a href="profile.php">Access Profile →</a>
-            </div>
-        </div>
-
-        <!-- Manage Doctors -->
-        <div class="dash-card red">
-            <div class="card-header">
-                <h3>Manage Doctors</h3>
-            </div>
-            <div class="card-body">
-                <i class="fa-solid fa-user-doctor"></i>
-                <p>Approve, edit or deactivate doctor accounts</p>
-            </div>
-            <div class="card-footer">
-                <a href="manage-doctors.php">Manage Doctors →</a>
-            </div>
-        </div>
-
-        <!-- Appointments -->
-        <div class="dash-card green">
-            <div class="card-header">
-                <h3>Appointments</h3>
-            </div>
-            <div class="card-body">
-                <h1>128</h1>
-                <p>Total Appointments</p>
-            </div>
-            <div class="card-footer">
-                <a href="appointments.php">View Appointments →</a>
-            </div>
-        </div>
-
-        <!-- Patients -->
-        <div class="dash-card orange">
-            <div class="card-header">
-                <h3>Patients</h3>
-            </div>
-            <div class="card-body">
-                <i class="fa-solid fa-users"></i>
-                <p>View and manage registered patients</p>
-            </div>
-            <div class="card-footer">
-                <a href="manage-patients.php">View Patients →</a>
-            </div>
-        </div>
-
-        <!-- Payments -->
-        <div class="dash-card purple">
-            <div class="card-header">
-                <h3>Payments</h3>
-            </div>
-            <div class="card-body">
-                <h1>56</h1>
-                <p>Total Transactions</p>
-                <strong>Total: $68,200</strong>
-            </div>
-            <div class="card-footer">
-                <a href="payments.php">View Payments →</a>
-            </div>
-        </div>
-
-        <!-- Reports -->
-        <div class="dash-card teal">
-            <div class="card-header">
-                <h3>Reports</h3>
-            </div>
-            <div class="card-body">
-                <h1>8</h1>
-                <p>System Reports Available</p>
-            </div>
-            <div class="card-footer">
-                <a href="reports.php">View Reports →</a>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 
     </div>
