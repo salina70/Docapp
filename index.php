@@ -80,7 +80,9 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
     border-radius: 6px;
     border: 1px solid #ccc;
 }
-
+#closeChat:hover{
+    cursor: pointer;
+}
 .chat-footer button {
     margin-left: 6px;
     padding: 8px 12px;
@@ -115,6 +117,31 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
     transform: scale(1.08);
 }
 
+#role{
+gap: 1rem;
+background-color: #282727ff;
+width: 68rem;
+height: 30rem;
+}
+.rolebox{
+height: 100vh;
+width: 100%;
+display: none;
+justify-content: center;
+align-items: center;
+}
+.box{
+    width: 26rem;
+    height: 14rem;
+    padding: 3rem 1rem;
+    background-color: gray;
+    font-size: 2.5rem;
+}
+.flex{
+      display: flex;
+justify-content: center;
+align-items: center;
+}
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,10 +171,22 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
 
     <div class="chat-footer">
         <input type="text" id="chatInput" placeholder="Type your message...">
-        <button id="sendBtn">
+        <button id="sendBtn" onclick="sendMessage()">
             <i class="fa-solid fa-paper-plane"></i>
         </button>
     </div>
+</div>
+
+<!-- after join button clicked, this should be shown -->
+<div class="rolebox">
+<div id="role" class="flex">
+    <div id="patient" class="box flex">
+        I am a patient
+    </div>
+     <div id="doctor" class="box flex">
+        I am a doctor
+    </div>
+</div>
 </div>
 
 
@@ -316,6 +355,7 @@ if(isset($_GET['login']) && $_GET['login']=='success'){
     </form>
   </div>
 </div>
+
 <script>
 const messIcon = document.getElementById("mess");
 const chatBox = document.getElementById("chatBox");
@@ -324,28 +364,31 @@ const sendBtn = document.getElementById("sendBtn");
 const chatInput = document.getElementById("chatInput");
 const chatBody = document.getElementById("chatBody");
 
-// Open chat
+/* Open chat */
 messIcon.onclick = () => {
-    chatBox.classList.toggle("active"); 
+    chatBox.classList.toggle("active");
 };
 
-
-// Close chat
+/* Close chat */
 closeChat.onclick = () => {
-chatBox.classList.remove("active");
+    chatBox.classList.remove("active");
 };
 
-// Send message
-sendBtn.onclick = sendMessage;
-chatInput.addEventListener("keypress", function(e) {
-    if (e.key === "Enter") sendMessage();
+/* Send message button */
+sendBtn.addEventListener("click", sendMessage);
+
+/* Enter key */
+chatInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
 });
 
 function sendMessage() {
     const message = chatInput.value.trim();
     if (message === "") return;
 
-    // User message
+    /* User message */
     const userMsg = document.createElement("div");
     userMsg.className = "chat-msg user";
     userMsg.textContent = message;
@@ -354,16 +397,29 @@ function sendMessage() {
     chatInput.value = "";
     chatBody.scrollTop = chatBody.scrollHeight;
 
-    // Fake bot reply (placeholder)
-    setTimeout(() => {
+    /* Call backend */
+    fetch("server/chatbot.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
         const botMsg = document.createElement("div");
         botMsg.className = "chat-msg bot";
-        botMsg.textContent = "🤖 Thanks! Our assistant will help you shortly.";
+        botMsg.textContent = data.reply;
         chatBody.appendChild(botMsg);
         chatBody.scrollTop = chatBody.scrollHeight;
-    }, 800);
+    })
+    .catch(() => {
+        const errorMsg = document.createElement("div");
+        errorMsg.className = "chat-msg bot";
+        errorMsg.textContent = "⚠️ Unable to reach assistant.";
+        chatBody.appendChild(errorMsg);
+    });
 }
 </script>
+
 
 <script src="public/app.js"></script>
 

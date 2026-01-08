@@ -1,16 +1,5 @@
-<?php
-session_start();
 
-/* after verifying email & password */
-$_SESSION['user_id'] = $user['id'];
-$_SESSION['user_name'] = $user['name'];
-
-header("Location: ../dashboard/doctor.php");
-exit;
-?>
-<?php session_start(); ?>
-
-<?php
+<?php session_start();
 if (!isset($_SESSION['user_id'])) {
     // NOT LOGGED IN → Show first navbar
 ?>
