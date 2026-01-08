@@ -1,10 +1,20 @@
 <?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+// Load .env
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+
 header("Content-Type: application/json");
 
 $data = json_decode(file_get_contents("php://input"), true);
 $userMessage = $data['message'] ?? '';
 
-$apiKey = "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"; // 🔴 KEEP SECRET
+$apiKey = $_ENV['OPEN_AI_KEY']; // 🔴 KEEP SECRET
 
 $payload = [
     "model" => "gpt-4.1-mini",
